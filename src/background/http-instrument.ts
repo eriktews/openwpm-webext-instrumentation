@@ -545,8 +545,8 @@ export class HttpInstrument {
   }
 
   /*
-  * HTTP Response Handlers and Helper Functions
-  */
+   * HTTP Response Handlers and Helper Functions
+   */
 
   private async logWithResponseBody(
     details: WebRequestOnBeforeRequestEventDetails,
@@ -558,9 +558,10 @@ export class HttpInstrument {
       const respBody = await responseBodyListener.getResponseBody();
       const contentHash = await responseBodyListener.getContentHash();
       this.dataReceiver.saveContent(
-        escapeString(respBody),
+        respBody,
         escapeString(contentHash),
       );
+      update.content_hash = contentHash;
       this.dataReceiver.saveRecord("http_responses", update);
     } catch (err) {
       /*
