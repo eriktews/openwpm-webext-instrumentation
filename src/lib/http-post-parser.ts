@@ -6,11 +6,14 @@ import {
 } from "../types/browser-web-request-event-details";
 // import { escapeString, escapeUrl } from "./string-utils";
 
+import { Uint8ToBase64 } from "./string-utils";
+
 // const components: any = {};
 
 export interface ParsedPostRequest {
   post_headers?: any;
   post_body?: any;
+  post_body_raw?: any;
 }
 
 export class HttpPostParser {
@@ -63,7 +66,8 @@ export class HttpPostParser {
     }
     if (requestBody.raw) {
       return {
-        post_body_raw: requestBody.raw,
+        post_body_raw: requestBody.raw.map(x =>
+          [x.file, Uint8ToBase64(x.bytes)]),
       };
     }
 
