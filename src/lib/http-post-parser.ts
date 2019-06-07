@@ -61,6 +61,11 @@ export class HttpPostParser {
         post_body: requestBody.formData,
       };
     }
+    if (requestBody.raw) {
+      return {
+        post_body_raw: requestBody.raw,
+      };
+    }
 
     // Return empty response until we have all instrumentation converted
     return {};
