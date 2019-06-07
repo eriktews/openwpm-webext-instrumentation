@@ -13,7 +13,7 @@ import { Uint8ToBase64 } from "./string-utils";
 export interface ParsedPostRequest {
   post_headers?: any;
   post_body?: any;
-  post_body_raw?: any;
+  post_body_raw?: string;
 }
 
 export class HttpPostParser {
@@ -67,7 +67,7 @@ export class HttpPostParser {
     if (requestBody.raw) {
       return {
         post_body_raw: JSON.stringify(requestBody.raw.map(x =>
-          [x.file, Uint8ToBase64(x.bytes)])),
+          [x.file, Uint8ToBase64(new Uint8Array(x.bytes))])),
       };
     }
 
