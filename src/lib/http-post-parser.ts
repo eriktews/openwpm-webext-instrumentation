@@ -61,6 +61,12 @@ export class HttpPostParser {
         post_body: requestBody.formData,
       };
     }
+    // TODO: This is just for debugging, remove it!
+    if (requestBody.raw) {
+      return {
+        post_body: "There is raw data!"
+      }
+    }
 
     // Return empty response until we have all instrumentation converted
     return {};
